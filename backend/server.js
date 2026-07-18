@@ -1,11 +1,11 @@
 // Falcon XL — Order backend
 // Receives { name, phone, items, total } from the checkout form
-// and emails it to the owner using nodemailer.
+// and emails it to the owner using Resend (HTTP API — works reliably on
+// hosts like Render that block outbound SMTP ports).
 
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
 
 const app = express();
 app.use(cors());              // allow requests from your storefront's domain
@@ -13,20 +13,9 @@ app.use(express.json());      // parse JSON bodies
 
 const PORT = process.env.PORT || 3000;
 
-// ---- Mail transport ----
-// Uses Gmail by default. See README for setting up an "App Password".
-// You can swap this for any SMTP provider (SendGrid, Mailgun, Outlook, etc.)
-const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE || 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,   // the address the server sends FROM
-    pass: process.env.EMAIL_PASS,   // app password, not your normal password
-  },
-});
-
 // Basic sanity check that env vars are set
 function checkConfig() {
-  const missing = ['EMAIL_USER', 'EMAIL_PASS', 'OWNER_EMAIL'].filter(k => !process.env[k]);
+  const missing = ['RESEND_API_KEY', 'OWNER_EMAIL'].filter(k => !process.env[k]);
   if (missing.length) {
     console.warn('⚠️  Missing required environment variables:', missing.join(', '));
     console.warn('   Orders will fail to send until these are set in your .env file.');
@@ -85,10 +74,12 @@ app.post('/api/order', rateLimit, async (req, res) => {
 
     const itemsText = items.map(it => `- ${it.label} x${it.qty} (${it.price} AED each)`).join('\n');
 
-    const mailOptions = {
-      from: `"Falcon XL Orders" <${process.env.EMAIL_USER}>`,
-      to: process.env.OWNER_EMAIL,
-      replyTo: undefined, // no customer email collected, so nothing to reply to directly
+    const emailPayload = {
+      // "onboarding@resend.dev" works out of the box with no domain setup.
+      // Once you verify your own domain in Resend, change this to something
+      // like "orders@falconxl.com" for a more professional sender address.
+      from: 'Falcon XL Orders <onboarding@resend.dev>',
+      to: [process.env.OWNER_EMAIL],
       subject: `New order from ${safeName} — ${total} AED`,
       text:
 `New order received on Falcon XL
@@ -120,7 +111,20 @@ Total: ${total} AED`,
 </div>`,
     };
 
-    await transporter.sendMail(mailOptions);
+    const resendRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(emailPayload),
+    });
+
+    if (!resendRes.ok) {
+      const errBody = await resendRes.text();
+      console.error('Resend API error:', resendRes.status, errBody);
+      throw new Error('Resend API request failed');
+    }
 
     res.json({ ok: true, message: 'Order sent successfully.' });
   } catch (err) {
