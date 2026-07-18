@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FALCON XL — Checkout</title>
+<link rel="icon" href="falcon-xl-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-side">
+      <button class="icon-btn" id="menu-btn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topnav">
+        <a href="index.html" class="nav-link" data-page="shop">Shop</a>
+        <a href="lab.html" class="nav-link" data-page="lab">Lab Tests</a>
+        <a href="support.html" class="nav-link" data-page="support">Support</a>
+      </div>
+    </div>
+
+    <a href="index.html" class="brand">
+      <img src="falcon-xl-logo.png" alt="Falcon XL">
+    </a>
+
+    <div class="topbar-side">
+      <button class="icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="icon-btn cart-btn" id="cart-btn" aria-label="View cart" style="pointer-events:none;opacity:0.5;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count zero" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-panel">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Shop</a>
+    <a href="lab.html">Lab Tests</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="support.html">Support</a>
+  </div>
+</div>
+
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Order</span>
+      <h2>Checkout</h2>
+      <p>Review your cart, then leave your name and number — we'll confirm your order and arrange delivery.</p>
+    </div>
+
+    <div class="checkout-grid">
+      <div class="checkout-box">
+        <div class="cart-summary-head">
+          <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);">Your Cart</span>
+          <button class="clear-cart-btn" id="clear-cart-btn" style="display:none;">Clear all</button>
+        </div>
+        <div class="cart-summary" id="cart-summary">
+          <div class="cart-empty">Your cart is empty — <a href="index.html" style="color:var(--gold-600);">browse the shop</a> to add something.</div>
+        </div>
+
+        <form id="checkout-form">
+          <label for="cname">Full Name</label>
+          <input type="text" id="cname" placeholder="e.g. Ahmed Al Maktoum" required>
+
+          <label for="cphone">Phone Number</label>
+          <input type="tel" id="cphone" placeholder="e.g. 050 123 4567" required>
+
+          <button type="submit" class="checkout-submit">Submit Order</button>
+          <div class="checkout-note">We'll reach out by phone to confirm items and arrange payment &amp; delivery.</div>
+        </form>
+      </div>
+
+      <div class="trust-box">
+        <h3>Why order with us</h3>
+        <ul>
+          <li>🚚 Fast, discreet delivery across the UAE</li>
+          <li>📞 We personally confirm every order by phone before shipping</li>
+          <li>🔒 Only your name and number are collected — nothing else</li>
+          <li>💬 Questions? Reach us anytime on <a href="support.html" style="color:var(--gold-600);">Support</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer">
+  <div class="wrap">
+    <strong>Research use disclosure.</strong> Products listed on this site are sold for laboratory research purposes only. They are not drugs, food, or cosmetics, and have not been evaluated or approved by any regulatory body to diagnose, treat, cure, or prevent any condition.
+  </div>
+</div>
+
+<footer>
+  <div class="brand"><img src="falcon-xl-logo.png" alt="Falcon XL" style="height:38px;width:38px;"></div>
+  <div class="foot-links">
+    <a href="index.html">Shop</a>
+    <a href="lab.html">Lab Tests</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="support.html">Support</a>
+  </div>
+  <p>© 2026 Falcon XL. All rights reserved. · For laboratory research use only.</p>
+</footer>
+
+<a class="wa-fab" id="wa-fab" href="#" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.56-1.17-2.97 0-1.42.74-2.11 1-2.4.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.82 2 .89 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.45.29.15.46.13.63-.08.17-.21.72-.84.92-1.13.19-.29.38-.24.63-.14.26.1 1.63.77 1.91.91.29.14.48.21.55.33.07.12.07.7-.17 1.38Z"/></svg>
+</a>
+
+<script src="products.js"></script>
+<script>
+  function renderCart(){
+    const el = document.getElementById('cart-summary');
+    const clearBtn = document.getElementById('clear-cart-btn');
+    const cart = getCart();
+    const keys = Object.keys(cart);
+    if(keys.length === 0){
+      el.innerHTML = `<div class="cart-empty">Your cart is empty — <a href="index.html" style="color:var(--gold-600);">browse the shop</a> to add something.</div>`;
+      clearBtn.style.display = 'none';
+      return;
+    }
+    clearBtn.style.display = 'inline-block';
+    let total = 0;
+    let rows = keys.map(k => {
+      const it = cart[k];
+      const lineTotal = it.unitPrice * it.qty;
+      total += lineTotal;
+      return `<div class="cart-line">
+        <span class="lbl"><span class="name">${it.label}${it.isPreorder ? '<span class="tag-preorder">Pre-order</span>' : ''}</span></span>
+        <div class="qty-stepper">
+          <button onclick="changeQty('${k}', -1)" aria-label="Decrease quantity">−</button>
+          <span>${it.qty}</span>
+          <button onclick="changeQty('${k}', 1)" aria-label="Increase quantity">+</button>
+        </div>
+        <span class="cart-line-price">${lineTotal} AED</span>
+      </div>`;
+    }).join('');
+    el.innerHTML = rows + `<div class="cart-total"><span>Total</span><span>${total} AED</span></div>`;
+  }
+  renderCart();
+
+  document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
+
+  const checkoutForm = document.getElementById('checkout-form');
+  const submitBtn = checkoutForm.querySelector('.checkout-submit');
+
+  checkoutForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = document.getElementById('cname').value.trim();
+    const phone = document.getElementById('cphone').value.trim();
+    const cart = getCart();
+    const keys = Object.keys(cart);
+    if(keys.length === 0){
+      showToast('Add at least one item to your cart first', 'error');
+      return;
+    }
+
+    const items = keys.map(k => ({
+      label: cart[k].label + (cart[k].isPreorder ? ' (Pre-order)' : ''),
+      qty: cart[k].qty,
+      price: cart[k].unitPrice,
+    }));
+    const total = items.reduce((sum, it) => sum + it.price * it.qty, 0);
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(ORDER_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, items, total }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        showToast(`Thanks, ${name}! We'll call ${phone} shortly.`);
+        checkoutForm.reset();
+        clearCart();
+      } else {
+        showToast(data.error || 'Something went wrong sending your order.', 'error');
+      }
+    } catch (err) {
+      showToast('Could not reach the order server. Please try again.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Order';
+    }
+  });
+
+  markActiveNav('checkout');
+  document.getElementById('wa-fab').href = 'https://wa.me/971500000000';
+</script>
+
+</body>
+</html>
