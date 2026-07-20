@@ -106,52 +106,56 @@ img{max-width:100%;}
 
 /* ---- Hero ---- */
 .hero{
-  position:relative;padding:64px 24px 56px;text-align:center;overflow:hidden;
+  position:relative;padding:44px 24px 40px;overflow:hidden;
   border-bottom:1px solid var(--line);
   background:var(--bg-alt);
 }
-.hero::before{
-  content:"";position:absolute;inset:0;
-  background:url('falcon-xl-logo.png') center 6% / 340px no-repeat;
-  opacity:0.05;pointer-events:none;
-}
-html.dark .hero::before{opacity:0.09;}
+.hero-inner{max-width:520px;margin:0 auto;position:relative;}
 .hero h1{
-  font-size:clamp(28px,5vw,46px);line-height:1.15;color:var(--ink);
-  margin-bottom:16px;position:relative;max-width:640px;margin-left:auto;margin-right:auto;
+  font-size:clamp(30px,7vw,42px);line-height:1.18;color:var(--ink);
+  margin-bottom:16px;text-transform:none;font-weight:700;letter-spacing:0.01em;
 }
 .hero h1 em{font-style:normal;color:var(--gold-600);}
 .hero p{
-  max-width:520px;margin:0 auto 28px;color:var(--ink-soft);font-size:15px;line-height:1.65;
-  position:relative;
+  color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0 0 24px;
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,var(--gold-400),var(--gold-600));
   color:#151005;font-weight:600;text-decoration:none;
-  padding:14px 30px;border-radius:2px;letter-spacing:.08em;text-transform:uppercase;font-size:13px;
+  padding:15px 28px;border-radius:100px;letter-spacing:0.01em;text-transform:none;font-size:14.5px;
   box-shadow:0 10px 24px -10px rgba(201,162,39,0.6);
-  position:relative;transition:transform .2s, box-shadow .2s;border:none;cursor:pointer;
+  transition:transform .2s, box-shadow .2s;border:none;cursor:pointer;
 }
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(201,162,39,0.75);}
 .btn-secondary{
   display:inline-block;background:transparent;
   color:var(--ink);font-weight:600;text-decoration:none;
-  padding:13px 28px;border-radius:2px;letter-spacing:.08em;text-transform:uppercase;font-size:13px;
+  padding:13px 28px;border-radius:100px;letter-spacing:0.01em;text-transform:none;font-size:14.5px;
   border:1px solid var(--line);transition:.2s;
 }
 .btn-secondary:hover{border-color:var(--gold-500);color:var(--gold-600);}
 
 /* ---- Stat badges ---- */
 .stat-strip{
-  display:flex;justify-content:center;gap:0;flex-wrap:wrap;
-  max-width:620px;margin:36px auto 0;position:relative;
+  display:flex;gap:0;flex-wrap:wrap;
+  margin:32px 0 0;
   border-top:1px solid var(--line);
 }
 .stat-strip div{
-  flex:1;min-width:140px;text-align:center;padding:22px 12px 0;
+  flex:1;min-width:120px;text-align:left;padding:18px 12px 0 0;
 }
-.stat-strip .num{font-family:'Oswald';font-size:22px;color:var(--ink);letter-spacing:.02em;}
-.stat-strip .lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
+.stat-strip .num{font-family:'Oswald';font-size:19px;color:var(--ink);letter-spacing:.02em;}
+.stat-strip .lbl{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
+
+/* ---- Search bar ---- */
+.search-bar{max-height:0;overflow:hidden;transition:max-height .25s ease;border-bottom:1px solid transparent;}
+.search-bar.open{max-height:70px;border-bottom:1px solid var(--line);}
+.search-bar .wrap{padding:12px 24px;}
+.search-bar input{
+  width:100%;background:var(--bg-alt);border:1px solid var(--line);color:var(--ink);
+  padding:11px 16px;border-radius:100px;font-size:13.5px;font-family:'Inter';
+}
+.search-bar input:focus{outline:2px solid var(--gold-500);outline-offset:1px;border-color:var(--gold-500);}
 
 /* ---- Section heading ---- */
 .section{padding:64px 24px;border-bottom:1px solid var(--line);}

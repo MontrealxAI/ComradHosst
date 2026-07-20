@@ -17,6 +17,9 @@
       <button class="icon-btn" id="menu-btn" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
+      <button class="icon-btn" id="search-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
       <div class="topnav">
         <a href="index.html" class="nav-link" data-page="shop">Shop</a>
         <a href="lab.html" class="nav-link" data-page="lab">Lab Tests</a>
@@ -29,11 +32,20 @@
     </a>
 
     <div class="topbar-side">
+      <a href="support.html" class="icon-btn" aria-label="Account / Support">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
       <button class="icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
       <button class="icon-btn cart-btn" id="cart-btn" aria-label="View cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span class="cart-count zero" id="cart-count">0</span>
       </button>
+    </div>
+  </div>
+
+  <div class="search-bar" id="search-bar">
+    <div class="wrap">
+      <input type="text" id="search-input" placeholder="Search peptides — e.g. BPC-157, Retatrutide...">
     </div>
   </div>
 </div>
@@ -49,14 +61,16 @@
 </div>
 
 <section class="hero">
-  <h1>Premium peptides,<br>built for the <em>UAE &amp; GCC.</em></h1>
-  <p>Falcon XL sources premium peptides in ready-to-use vials, with straightforward pricing and fast delivery across the UAE. No confusing tiers, no guesswork — just the compounds you're looking for.</p>
-  <a href="#shop" class="btn-primary">Shop Peptides →</a>
+  <div class="hero-inner">
+    <h1>Premium peptides,<br>trusted across the<br><em>UAE &amp; GCC.</em></h1>
+    <p>Falcon XL is the UAE and GCC's dedicated source for premium peptides. Every order is handled with care, packaged discreetly, and backed by a team that actually answers.</p>
+    <a href="#shop" class="btn-primary">Shop Premium Peptides →</a>
 
-  <div class="stat-strip">
-    <div><div class="num">5+</div><div class="lbl">Compounds</div></div>
-    <div><div class="num">100%</div><div class="lbl">Authentic Product</div></div>
-    <div><div class="num">UAE</div><div class="lbl">Fast Shipping</div></div>
+    <div class="stat-strip">
+      <div><div class="num">≥99%</div><div class="lbl">Purity</div></div>
+      <div><div class="num">UAE</div><div class="lbl">&amp; GCC Delivery</div></div>
+      <div><div class="num">5+</div><div class="lbl">Premium Compounds</div></div>
+    </div>
   </div>
 </section>
 
@@ -66,6 +80,7 @@
       <h2>Shop Peptides by Category</h2>
       <a href="#shop" class="view-all-link">View all peptides →</a>
     </div>
+    <p style="color:var(--ink-soft);font-size:13.5px;margin:-24px 0 30px;max-width:520px;">Every peptide on Falcon XL is sourced for premium quality and shipped fast, discreetly, and reliably across the UAE and wider GCC.</p>
 
     <div class="tabs">
       <button class="tab-btn active" data-tab="vials">Vials</button>
@@ -78,7 +93,7 @@
 
     <div class="tab-panel" id="panel-pens">
       <div class="section-head" style="margin-bottom:26px;">
-        <p style="margin-top:0;">⚡ Pre-order the pen line today and lock in <strong style="color:var(--gold-600);">10% off</strong> — you won't be charged until they ship.</p>
+        <p style="margin-top:0;">⚡ Be first in line — <strong style="color:var(--gold-600);">pre-order today and lock in 10% off</strong> before the pen line launches. Nothing is charged until it ships.</p>
       </div>
       <div class="grid" id="pen-grid"></div>
     </div>
@@ -165,6 +180,22 @@
   renderGrid(VIALS, 'vial-grid', false);
   renderGrid(PENS, 'pen-grid', true);
 
+  // ---- Search ----
+  const searchBtn = document.getElementById('search-btn');
+  const searchBar = document.getElementById('search-bar');
+  const searchInput = document.getElementById('search-input');
+  searchBtn.addEventListener('click', () => {
+    searchBar.classList.toggle('open');
+    if(searchBar.classList.contains('open')) searchInput.focus();
+  });
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+      const name = card.querySelector('h3').textContent.toLowerCase();
+      card.style.display = name.includes(q) ? '' : 'none';
+    });
+  });
+
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -193,7 +224,7 @@
   markActiveNav('shop');
 
   // WhatsApp placeholder — update the number once you have a business line
-  document.getElementById('wa-fab').href = 'https://wa.me/971500000000';
+  document.getElementById('wa-fab').href = 'https://wa.me/13124812121';
 </script>
 
 </body>

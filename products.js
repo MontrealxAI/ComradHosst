@@ -5,45 +5,43 @@ const ORDER_API_URL = "https://comradhosst.onrender.com/api/order";
 
 const VIALS = [
   {
-    id:'bpc157', name:'BPC-157', dose:'Vial', price:300, accent:'#c9a227', lines:['BPC-157'],
+    id:'bpc157', name:'BPC-157', dose:'Vial', price:330, accent:'#c9a227', lines:['BPC-157'],
     tagline:'Recovery & repair support',
     benefits:['Supports tissue repair & recovery','Supports gut lining health','Supports joint & tendon comfort'],
     pills:['Recovery','Gut Health','Joints'],
   },
   {
-    id:'cjcipa', name:'CJC-1295 + Ipamorelin', dose:'Blend vial', price:300, accent:'#b08d2c', lines:['CJC-1295','+ IPAMORELIN'],
+    id:'cjcipa', name:'CJC-1295 + Ipamorelin', dose:'Blend vial', price:330, accent:'#b08d2c', lines:['CJC-1295','+ IPAMORELIN'],
     tagline:'Growth hormone & recovery blend',
     benefits:['Supports natural growth hormone release','Supports lean muscle & recovery','Supports deeper sleep quality'],
     pills:['Muscle','Sleep','Recovery'],
   },
   {
-    id:'reta30', name:'Retatrutide 30mg', dose:'30 mg vial', price:620, accent:'#d4b23a', lines:['RETATRUTIDE','30MG'],
+    id:'reta30', name:'Retatrutide 30mg', dose:'30 mg vial', price:682, accent:'#d4b23a', lines:['RETATRUTIDE','30MG'],
     tagline:'Weight & metabolism support',
     benefits:['Supports weight management','Supports metabolic health','Supports appetite regulation'],
     pills:['Weight Loss','Metabolism','Appetite'],
   },
   {
-    id:'reta10', name:'Retatrutide 10mg', dose:'10 mg vial', price:330, accent:'#c9a227', lines:['RETATRUTIDE','10MG'],
-    tagline:'Weight & metabolism support',
-    benefits:['Supports weight management','Supports metabolic health','Supports appetite regulation'],
-    pills:['Weight Loss','Metabolism','Appetite'],
-  },
-  {
-    id:'ghkcu', name:'GHK-Cu', dose:'300 mg vial', price:330, accent:'#b97a4c', lines:['GHK-CU'],
+    id:'ghkcu', name:'GHK-Cu', dose:'300 mg vial', price:363, accent:'#b97a4c', lines:['GHK-CU'],
     tagline:'Skin & collagen support',
     benefits:['Supports skin firmness & collagen','Supports visible signs of aging','Supports wound healing'],
     pills:['Skin','Anti-Aging','Collagen'],
   },
 ];
 
-const PENS = VIALS.map(v => ({
-  ...v,
-  id: v.id + '-pen',
-  name: v.name + ' Pen',
-  dose: v.dose.replace('vial', 'pen').replace('Vial', 'Pen'),
-  preorderPrice: Math.round(v.price * 0.9),
-  isPen: true,
-}));
+const PENS = VIALS.map(v => {
+  const penListPrice = Math.round(v.price * 1.35);
+  return {
+    ...v,
+    id: v.id + '-pen',
+    name: v.name + ' Pen',
+    dose: v.dose.replace('vial', 'pen').replace('Vial', 'Pen'),
+    price: penListPrice,
+    preorderPrice: Math.round(penListPrice * 0.9),
+    isPen: true,
+  };
+});
 
 const ALL_PRODUCTS = [...VIALS, ...PENS];
 
